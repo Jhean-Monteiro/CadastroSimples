@@ -1,41 +1,99 @@
+
+/* ====================== ESTILOS GERAIS ====================== */
+
 body {
-  font-family: Arial;
-  background-color: black;
-  text-align: center;
-  padding: 50px;
+  font-family: Arial;            /* define a fonte padrão */
+  background-color: black;     /* põe fundo preto */
+  text-align: center;            /* alinha texto no centro */
+  padding: 50px;                 /* espaçamento interno */
 }
 
+
+
+/* ====================== FORMULÁRIO ====================== */
+
 form {
-  background-color: yellow;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: right;
-  display: inline-block;
-  box-shadow: 0 0 10px red;
+  background-color: yellow;   /* cor do formulario */
+  padding: 20px;                /* espaçamento interno do formulario */
+  border-radius: 10px;          /* bordas arredondadas */
+  text-align: right;            /* alinhar texto */
+  display: inline-block;        /* permite centralizar com margin auto */
+  box-shadow: 0 0 10px red;   /* sommbra vermelha (brilhante) */
 }
 
 h2 {
-  background-color: yellow;
-  border-radius: 10px;
-  box-shadow: 0 0 10px white;
-  margin-left: 300px;
-  margin-right: 300px;
+  background-color: yellow;       /* fundo amarelo do titulo */
+  border-radius: 10px;              /* bordas arredondadas */
+  box-shadow: 0 0 10px white;     /* sombra branca */
+  margin-left: 300px;               /* corrigir posteriormente... */
+  margin-right: 300px;              /* corrigir posteriormente... */
   }
 
+
+
+/* ====================== BLOCOS LATERAIS ====================== */
 p {
-  color: blue;
-  background-color: blue;
-  border-radius: 10px;
-  box-shadow: 0 0 10px white;
-  float: left;
-  padding-bottom: 1000px;
-  }
+  color: blue;                          /* texto azul (mas background cobre) */
+  background-color: blue;               /* fundo azul */
+  border-radius: 10px;                    /* cantos arredondados */
+  box-shadow: 0 0 10px white;           /* sombra branca */
+  float: left;                            /* flutua à esquerda */
+  padding-bottom: 1000px;                 /* altura absurda (efeito visual) */
+}
 
 h4 {
-  color: blue;
-  background-color: blue;
-  border-radius: 10px;
-  box-shadow: 0 0 10px white;
-  float: right;
-  padding-bottom: 1000px;
-  }
+  color: blue;                          /* texto azul */
+  background-color: blue;               /* fundo azul */
+  border-radius: 10px;                    /* cantos arredondados */
+  box-shadow: 0 0 10px white;           /* sombra branca */
+  float: right;                           /* flutua à direita */
+  padding-bottom: 1000px;                 /* altura absurda */
+}
+
+
+
+/* ====================== TOAST FLUTUANTE ====================== */
+.toast {
+  position: fixed;                            /* fica fixo na tela, sobre tudo */
+  top: 50%;                                   /* 50% no topo */
+  left: 50%;                                  /* 50% a esquerda */
+  transform: translate(-50%, -50%) scale(0);  /* centraliza e começa invisível (vai escalado) */
+  background-color: rgba(0, 0, 0, 0.9);     /* fundo preto semi-transparente */
+  color: yellow;                        /* texto amarelo */
+  padding: 20px 30px;
+  border-radius: 15px;
+  font-weight: bold;                      /* texto em negrito */
+  text-align: center;                     /* texto centralizado */
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);         /* sombra vermelha forte */
+  z-index: 1000;                                       /* fica acima de tudo */
+  transition: transform 0.3s ease, opacity 0.3s ease;  /* animação suave */
+  opacity: 0;                                          /* começa invisível */
+  max-width: 90%;                                      /* para telas pequenas */
+  border: 2px solid red;                             /* borda vermelha */
+}
+
+
+/* classe que ativa o toast */
+.toast.show {
+  transform: translate(-50%, -50%) scale(1);   /* escala para tamanho normal */
+  opacity: 1;                 /* torna visível */
+}
+
+
+/* barra de progresso dentro do toast */
+#progress {
+  height: 4px;                 /* altura da barra */
+  background: red;           /* cor vermelha */
+  margin-top: 10px;            /* espaço acima */
+  border-radius: 2px;          /* cantos arredondados */
+  width: 0%;                   /* começa com 0% (animação preenche) */
+  animation: progress 3s linear forwards;
+}
+
+
+
+/* animação da barra de progresso */
+@keyframes progress {
+  from { width: 100%; }   /* começa cheia */
+  to { width: 0%; }       /* termina vazia */
+}

@@ -1,137 +1,67 @@
-// Funções de validação em tempo real e envio
+// function validarCPF(cpf) {
+//   cpf = cpf.replace(/[^\d]+/g, ''); // remove pontos e traços
+//   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Seleciona todos os grupos dos campos
-  const grupos = [
-    document.getElementById('grupo-nome'),
-    document.getElementById('grupo-email'),
-    document.getElementById('grupo-senha'),
-    document.getElementById('grupo-confirmar'),
-    document.getElementById('grupo-estado'),
-    document.getElementById('grupo-termos'),
-    document.getElementById('btn-cadastrar')
-  ];
+//   let soma = 0, resto;
 
-  // Inicializa apenas o campo de nome visível
-  grupos.forEach((grupo, idx) => {
-    if (idx === 0) {
-      grupo.classList.remove('oculto');
-      grupo.classList.add('visivel');
+//   for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+//   resto = (soma * 10) % 11;
+//   if (resto === 10 || resto === 11) resto = 0;
+//   if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+//   soma = 0;
+//   for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+//   resto = (soma * 10) % 11;
+//   if (resto === 10 || resto === 11) resto = 0;
+//   if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+//   return true;
+// }
+
+
+
+
+// ====================== ESPERA O HTML CARREGAR ======================
+
+document.addEventListener('DOMContentLoaded', function () { // executa apenas quando todo o DOM estiver carregado
+  const campoNome = document.getElementById('nome'); // pega o input do nome
+  const toast = document.getElementById('toast');   // pega o toast flutuante
+
+  let timeoutId = null; // armazena o ID do setTimeout para controle
+
+
+  // ====================== EVENTO DE DIGITAÇÃO ======================
+  campoNome.addEventListener('input', function () {
+    const valor = campoNome.value; // pega o valor atual do campo
+
+    // se exceder 50 caracteres
+    if (valor.length >= 50) {
+      // cortar excesso
+      campoNome.value = valor.slice(0, 50);
+
+      // adiciona a classe 'show' para exibir o toast
+      toast.classList.add('show');
+
+
+      clearTimeout(timeoutId); // Cancela qualquer timeout anterior (evita múltiplos)
+
+      // Remove o toast após 3 segundos
+      timeoutId = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+
     } else {
-      grupo.classList.add('oculto');
+      // Se o usuário apagar e ficar abaixo de 50, remove imediatamente
+      clearTimeout(timeoutId);
+      toast.classList.remove('show');
     }
   });
 
-  // Sequência de campo para campo
-  for (let i = 0; i < grupos.length - 1; i++) {
-    const input = grupos[i].querySelector('input, select');
-    if (input) {
-      input.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          // Só mostra o próximo grupo se o campo não estiver vazio
-          if (input.value.trim() !== '' && 
-              (input.type !== 'checkbox' ? true : input.checked)) {
-            const proxGrupo = grupos[i + 1];
-            proxGrupo.classList.add('visivel');
-            proxGrupo.classList.remove('oculto');
-            input.blur();
-          }
-        }
-      });
-    }
-  }
 
-  // Resto da sua validação (igual seu modelo)
 
-  const form = document.getElementById('cadastroForm');
-  const nome = document.getElementById('nome');
-  const email = document.getElementById('email');
-  const senha = document.getElementById('senha');
-  const confirmar = document.getElementById('confirmar');
-  const estado = document.getElementById('estado');
-  const termos = document.getElementById('termos');
-  const sucesso = document.getElementById('sucesso');
-
-  function showError(input, msg) {
-    input.classList.add('invalid');
-    input.classList.remove('valid');
-    const feedback = input.parentElement.querySelector('.feedback');
-    feedback.style.display = 'block';
-    feedback.textContent = msg;
-  }
-  function showValid(input) {
-    input.classList.remove('invalid');
-    input.classList.add('valid');
-    const feedback = input.parentElement.querySelector('.feedback');
-    feedback.style.display = 'none';
-  }
-  function validateEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
-  function checkSenha() {
-    if (senha.value.length < 6) {
-      showError(senha, 'Senha mínima de 6 caracteres.');
-      return false;
-    } else {
-      showValid(senha);
-      return true;
-    }
-  }
-  function checkConfirmar() {
-    if (confirmar.value !== senha.value || confirmar.value.length === 0) {
-      showError(confirmar, 'As senhas não coincidem.');
-      return false;
-    } else {
-      showValid(confirmar);
-      return true;
-    }
-  }
-  nome.addEventListener('input', function() {
-    if (nome.value.trim().length < 2) {
-      showError(nome, 'Digite pelo menos 2 caracteres.');
-    } else {
-      showValid(nome);
-    }
-  });
-  email.addEventListener('input', function() {
-    if (!validateEmail(email.value)) {
-      showError(email, 'Email inválido.');
-    } else {
-      showValid(email);
-    }
-  });
-  senha.addEventListener('input', checkSenha);
-  confirmar.addEventListener('input', checkConfirmar);
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    if (
-      nome.value.trim().length < 2 ||
-      !validateEmail(email.value) ||
-      senha.value.length < 6 ||
-      confirmar.value !== senha.value ||
-      !estado.value ||
-      !termos.checked
-    ) {
-      if (nome.value.trim().length < 2) showError(nome, 'Nome obrigatório.');
-      if (!validateEmail(email.value)) showError(email, 'Email inválido.');
-      if (senha.value.length < 6) showError(senha, 'Senha curta.');
-      if (confirmar.value !== senha.value) showError(confirmar, 'Senhas não coincidem.');
-      if (!estado.value) showError(estado, 'Selecione uma opção.');
-      if (!termos.checked) termos.parentElement.style.color = '#d43f3a';
-      sucesso.style.display = 'none';
-      return;
-    } else {
-      sucesso.style.display = 'block';
-      sucesso.textContent = 'Cadastro realizado com sucesso!';
-      form.reset();
-      setTimeout(() => { sucesso.style.display = 'none'; }, 2800);
-      document.querySelectorAll('.feedback').forEach(fb => fb.style.display = 'none');
-      document.querySelectorAll('input, select, textarea').forEach(inp => inp.classList.remove('valid', 'invalid'));
-      termos.parentElement.style.color = '';
-    }
-  });
-  termos.addEventListener('change', function() {
-    if (termos.checked) termos.parentElement.style.color = '';
+  // ====================== CLIQUE NO TOAST ======================
+  // permite fechar o toast clicando nele
+  toast.addEventListener('click', () => {
+    toast.classList.remove('show');
   });
 });

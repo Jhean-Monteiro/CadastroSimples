@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Usuário</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Cadastro de Usuário</h2>
+  <form id="formCadastro" method="POST" action="/cadastrar"> <!-- inicio do form (parte principal da pagina de login) -->
+
+    <label>Nome:</label>
+    <input type="text" id="nome" required><br><br>
+
+    <label>CPF:</label>
+    <input type="cpf" name="cpf" required><br><br>
+
+    <label>Telefone:</label>
+    <input type="telefone" name="telefone" required><br><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
+
+    <label>Senha:</label>
+    <input type="password" name="senha" required><br><br>
+
+    <label>RG:</label>
+    <input type="rg" name="rg" required><br><br>
+
+  </form>
+
+    <p>===float===</p> <!-- bloco flutuante que aparece à esquerda na pagina (estilo no CSS) -->
+    <h4>===float===</h4> <!-- bloco flutuante que aparece à direita na pagina (estilo no CSS) -->
+
+
+  <!-- toast flutuante que aparece quando o nome atinge 50 caracteres -->
+  <div id="toast" class="toast"> 
+    <strong>Limite de 50 caracteres atingido!</strong> <!--- exibe mensagem em negrito --->
+    <div id="progress"></div> <!-- barra de progresso (sem muita relevancia)-->
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+
