@@ -1,0 +1,41 @@
+body {
+  font-family: Arial;
+  background-color: black;
+  text-align: center;
+  padding: 50px;
+}
+
+form {
+  background-color: yellow;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: right;
+  display: inline-block;
+  box-shadow: 0 0 10px red;
+}
+
+h2 {
+  background-color: yellow;
+  border-radius: 10px;
+  box-shadow: 0 0 10px white;
+  margin-left: 300px;
+  margin-right: 300px;
+  }
+
+p {
+  color: blue;
+  background-color: blue;
+  border-radius: 10px;
+  box-shadow: 0 0 10px white;
+  float: left;
+  padding-bottom: 1000px;
+  }
+
+h4 {
+  color: blue;
+  background-color: blue;
+  border-radius: 10px;
+  box-shadow: 0 0 10px white;
+  float: right;
+  padding-bottom: 1000px;
+  }
