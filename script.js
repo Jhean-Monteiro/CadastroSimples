@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // function validarCPF(cpf) {
 //   cpf = cpf.replace(/[^\d]+/g, ''); // remove pontos e traços
 //   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () { // executa apenas qu
     toast.classList.remove('show');
   });
 });
-=======
+
 function validarCPF(cpf) {
   cpf = cpf.replace(/[^\d]+/g, ''); // remove pontos e traços
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -86,4 +86,4 @@ function validarCPF(cpf) {
 
   return true;
 }
->>>>>>> 0f708e8c6b14095d0ae2474c5e5918c1e5856dcd
+
