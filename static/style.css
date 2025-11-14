@@ -1,0 +1,158 @@
+/* ====================== ESTILOS GERAIS ====================== */
+/* fundo preto, letra branca, tudo centralizado. */
+body {
+  font-family: Arial;               /* define a fonte padrão */
+  background-color: black;        /* põe fundo preto */
+  text-align: center;               /* alinha texto no centro */
+  padding: 50px;                    /* espaçamento interno */
+  color: white;                  /* Todas as letras brancas */
+}
+
+/* ====================== FORMULÁRIO ====================== */
+/* formulário amarelo com sombra vermelha. */
+form {
+  background-color: green;       /* cor do formulario */
+  padding: 30px;                    /* espaçamento interno do formulario */
+  border-radius: 10px;              /* bordas arredondadas */
+  text-align: right;                /* alinhar texto */
+  display: inline-block;            /* permite centralizar com margin auto */
+  box-shadow: 0 0 10px white;       /* sommbra vermelha (brilhante) */
+  color: black;                   /* texto cor preto */
+  margin: 20px auto;                /* centraliza na horizontal */
+}
+/* título verde centralizado. */
+h2 {
+  background-color: green;       /* fundo amarelo do titulo */
+  padding: 15px;                    /*espaço das bordas*/
+  border-radius: 10px;              /* bordas arredondadas */
+  box-shadow: 0 0 10px white;     /* sombra branca */ 
+  text-align: center;               /*texto alinhado*/
+  margin: 0 auto;         /* empurra da esquerda pro centro fixo */              
+  color: white;                   /* cor de texto preto */
+  font-weight: bold;                /* texto em negrito */
+  -webkit-text-stroke: 0.9px rgb(0, 0, 0); 
+}
+
+/* ====================== BLOCOS LATERAIS ====================== */
+/* essas são as caixas laterais .
+padding-bottom: 1000px faz elas ocuparem a tela toda verticalmente.
+position: fixed gruda na tela. */
+p, h4 {
+  color: white;                     /* texto branco (sem texto por enquanto) */
+  background-color: blue;           /* fundo azul */
+  border-radius: 10px;                /* cantos arredondados */
+  box-shadow: 0 0 10px white;       /* sombra branca */
+  padding: 15px;                      /* espaço interno */
+  margin: 0;                          /* remove margens externas */
+  width: 200px;                       /* largura fixa de 200px */
+  text-align: center;                 /* texto centralizado */
+  font-weight: bold;                  /* negrito */
+  padding-bottom: 1000px;             /* altura absurda (efeito visual) */
+  position: fixed;                    /* fixa na tela para não rola com a página */
+  top: 0;                             /* cola no topo */
+  z-index: 10;                        /* fica por cima do formulário */
+}
+/* uma fica na esquerda, outra na direita. */
+p { float: left;                      /*flutua à esquerda */
+  left: 20px; }                       /* 20px da borda esquerda */
+h4 { float: right;                    /* flutua à direita */
+   right: 20px; }                     /* 20px da borda derecha */
+
+
+/* ====================== INPUTS ====================== */
+/* todos os campos de entrada com borda vermelha. */
+input {
+  width: 220px;                       /* largura fixa dos campos */
+  padding: 8px;                       /* espaço interno */
+  margin-left: 10px;                  /* afasta do label */
+  border: 2px solid red;            /* borda vermelha grossa */
+  border-radius: 5px;                 /* cantos levemente arredondados */
+  font-size: 16px;                    /* tamanho da letra */
+}
+/* quando clica no campo, fica com borda branca brilhante. */
+input:focus {
+  outline: none;                      /* remove borda azul padrão do navegador */
+  border-color: white;              /* borda vira branca */
+  box-shadow: 0 0 8px white;        /* brilho branco quando digita */
+}
+/* botão vermelho que escurece quando passa o mouse. */
+button {
+  background: red;                  /* fundo vermelho */
+  color: yellow;                    /* letra amarela */
+  border: none;                       /* sem borda */
+  padding: 12px 30px;                 /* tamanho do botão */
+  font-size: 18px;                    /* letra grande */
+  font-weight: bold;                  /* negrito */
+  border-radius: 8px;                 /* cantos arredondados */
+  cursor: pointer;                    /* mãozinha quando passa o mouse */
+  margin-top: 20px;                   /* espaço acima */
+  box-shadow: 0 0 10px white;       /* brilho branco */
+}
+
+button:hover {
+  background: darkred;              /* escurece quando passa o mouse */
+}
+
+/* ====================== TOAST FLUTUANTE ====================== */
+/* toast escondido no meio da tela, só aparece com a classe .show. */
+.toast {
+  position: fixed;                                       /* fica fixo na tela, sobre tudo */
+  top: 50%;                                              /* 50% no topo */
+  left: 50%;                                             /* 50% a esquerda */
+  transform: translate(-50%, -50%) scale(0);             /* centraliza e começa invisível (vai escalado) */
+  background-color: rgba(0, 0, 0, 0.9);                /* fundo preto semi-transparente */
+  color: yellow;                                       /* texto amarelo */
+  padding: 20px 30px;                                    /* espaço interno */
+  border-radius: 15px;                                   /* muito arredondado */
+  font-weight: bold;                                     /* negrito */
+  text-align: center;                                    /* texto centralizado */
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);           /* sombra vermelha forte */ 
+  z-index: 1000;                                         /* fica acima de tudo */ 
+  transition: transform 0.3s ease, opacity 0.3s ease;    /* animação suave */
+  opacity: 0;                                            /* começa invisível */
+  max-width: 90%;                                        /* para telas pequenas */
+  border: 2px solid red;                               /* borda vermelha */
+}
+/* classe que ativa o toast */
+.toast.show {
+  transform: translate(-50%, -50%) scale(1);             /* escala para tamanho normal */
+  opacity: 1;                                            /* torna visível */
+}
+/* Barra vermelha que some em 3 segundos (efeito de contagem regressiva). */
+#progress {
+  height: 4px;                                          /* altura da barra */
+  background: red;                                    /* cor vermelha fundo */
+  margin-top: 10px;                                     /* espaço acima */
+  border-radius: 2px;                                   /* cantos arredondados */
+  width: 0%;                                            /* começa com 0% (animação preenche) */
+  animation: progress 3s linear forwards;               /* animação de 3 segundos */
+}
+/* animação da barra de progresso */
+@keyframes progress {
+  from { width: 100%; }                                 /* começa cheia */
+  to { width: 0%; }                                     /* termina vazia */
+}
+
+/* ====================== FEEDBACK ====================== */
+/* mensagens de sucesso e erro. */
+#feedback {
+  margin-top: 20px;                                    /* espaço acima */
+  padding: 15px;                                       /* espaço interno */  
+  border-radius: 10px;                                 /* cantos arredondados */
+  font-weight: bold;                                   /* fonte em negrito */
+  display: none;                                       /* começa escondido */
+}
+
+.success {
+  background: green;                                /* verde quando dá certo */  
+  color: yellow;                                    /* letra amarela */ 
+}
+
+.error {
+  background: red;                                  /* vermelho quando dá erro */
+  color: yellow;                                    /* letra amarela */
+}
+
+p7 {
+    color: white;
+}

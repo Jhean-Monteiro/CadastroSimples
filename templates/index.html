@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Usuário</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <h2>Crie sua conta na <p7><u>Biblioteca Digital</u></p7></h2>
+
+  <!-- Bloco flutuante à esquerda que aparece na pagina (estilo no CSS) -->
+  <p>
+    <!-- <strong>Dicas:</strong><br>
+    • Use senhas fortes<br>
+    • Não compartilhe dados<br>
+    • Verifique o e-mail -->
+  </p>
+
+  <!-- Bloco flutuante à direita que aparece na pagina (estilo no CSS)-->
+  <h4>
+    <!-- <strong>Regras:</strong><br>
+    • CPF válido<br>
+    • Senha ≥ 6 caracteres<br>
+    • Todos os campos obrigatórios -->
+  </h4>
+
+  <!-- Formulário -->
+  <form id="formCadastro" method="POST" action="/cadastrar" novalidate onsubmit="enviarCadastro(event)"> <!-- novalidate=desativa validação automática do navegador (validação feita no JS)-->
+    <label>Nome:</label>
+    <input type="text" name="nome" id="nome" maxlength="50" placeholder="Maria da Silva" required><br><br> <!--placeholder="Maria da Silva" campo cinza para exemplo-->
+    <!--maxlength padrão de tamanho de comprimento mínimo Validação de restrição Validação de formulário -->
+    <label>RG:</label>
+    <input type="text" id="rg" name="rg" placeholder="00.000.000-0" required><br><br> <!--placeholder="000.000.000-00" campo cinza para exemplo-->
+
+    <label>CPF:</label>
+    <input type="text" id="cpf" placeholder="000.000.000-00" required><br><br>
+
+    <label>WhatsApp:</label>
+    <input type="tel" id="telefone" placeholder="(00) 00000-0000" required><br><br><!--type="tel" é o mais correto pra celular.-->
+
+    <label>Email:</label>
+    <input type="email" id="email" placeholder="cadastro@gmail.com" required><br><br><!--type="email" O navegador já valida se tem @ e ponto.-->
+
+    <label>Criar Senha:</label>
+    <input type="password" id="senha" minlength="6" placeholder="******"><br><br><!--type="password" esconde os caracteres-->
+    <!--minlength padrão de tamanho de comprimento mínimo Validação de restrição Validação de formulário -->
+    <button type="submit">CADASTRAR</button> <!--botão que envia o formulário-->
+  </form>
+
+  <!-- Toast flutuante -->
+  <div id="toast" class="toast"> 
+    <strong>Limite de 50 caracteres atingido!</strong> <!--- exibe mensagem em negrito --->
+    <div id="progress"></div> <!-- barra de progresso (sem muita relevancia)-->
+  </div>
+
+  <!-- Mensagem de feedback-Caixa verde ou vermelha que aparece embaixo dizendo "sucesso" ou "corrija os erros". -->
+  <div id="feedback"></div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <!-- Olá, mundo.-->
+</body>
+</html>
